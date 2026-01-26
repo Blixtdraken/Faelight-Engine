@@ -35,4 +35,4 @@ set(GLFW_INSTALL OFF CACHE INTERNAL "")
 FetchContent_MakeAvailable(glfw)
 
 # Link it to your executable or library
-target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
+target_link_libraries(Faelight PRIVATE glfw)
