@@ -8,7 +8,7 @@ export namespace FL {
 
     template <typename ...Args>struct sCallback {
         std::function<void(Args...)> raw_func_ptr = {};
-        bool                      one_shot = false;
+        bool                         one_shot = false;
     };
 
     template <typename ...Args> class Signal{

@@ -19,6 +19,8 @@ int main() {
         return 0;
     }
 
+
+
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
         FL::Log::info("Pressed: {}", glfwGetKey(window, GLFW_KEY_LEFT));
