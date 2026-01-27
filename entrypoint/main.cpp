@@ -7,7 +7,7 @@ import faelight.signal;
 int main() {
 
     FL::Log::Config::setLogLevel(FL::Log::eLogLevel::DEBUG);
-    FL::Log::info("Hello! Can I have your name? <3");
+    FL::Log::joke("Hello! Can I have your name? <3");
 
     glfwInit();
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -23,7 +23,8 @@ int main() {
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-        FL::Log::info("Pressed: {}", glfwGetKey(window, GLFW_KEY_LEFT));
+        //FL::Log::info("Pressed: {}", glfwGetKey(window, GLFW_KEY_LEFT));
+
     }
 
     return 0;

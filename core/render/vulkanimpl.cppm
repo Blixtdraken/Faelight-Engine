@@ -12,7 +12,7 @@ export module vulkanimpl;
 
 class VulkanImpl {
 
-    VkInstance instance;
+    vkb::Instance instance;
 
 
     bool createInstance() {
@@ -43,9 +43,13 @@ class VulkanImpl {
         }
 
 
-        instance = instance_rep.value();
+        instance = new vkb::Instance(instance_rep.value());
         return true;
     }
 
+    bool pickPhysicalDevice(vkb::Instance _instance) {
+        vkb::PhysicalDeviceSelector phys_device_selector(_instance);
+        
+    }
 
 };
