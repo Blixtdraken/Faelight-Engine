@@ -1,8 +1,9 @@
+#define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
 import faelight.log;
 import faelight.signal;
-
+import faelight.render.vulkanimpl;
 
 int main() {
 
@@ -15,8 +16,19 @@ int main() {
     GLFWwindow* window = glfwCreateWindow(1280, 720, "Faelight", nullptr, nullptr);
 
     if (!window) {
-        FL::Log::err("Failed to create window");
-        return 0;
+        FL::Log::err("Failed to create window!");
+        return 1;
+    }
+
+
+
+    VulkanImpl vulkan = VulkanImpl();
+    vulkan.setup(window);
+
+    VkResult err = glfwCreateWindowSurface(vulkan.instance, window, nullptr, &vulkan.get_surface());
+    if (err != VK_SUCCESS) {
+        FL::Log::err("Failed to create surface!");
+        return 1;
     }
 
 
