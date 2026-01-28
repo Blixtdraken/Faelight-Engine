@@ -1,3 +1,2 @@
-glslc default.vert -o vert.spv
-glslc default.frag -o frag.spv
-pause
+glslc default.vert -c -o vert.spv
+glslc default.frag -c -o frag.spv

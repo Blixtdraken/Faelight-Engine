@@ -267,7 +267,7 @@ export namespace FL{
                 Log::err("Failed to create swapchain: {}", swapchain_res.error().message());
                 return false;
             }
-
+            //vkb::destroy_swapchain(swapchain);
             swapchain = swapchain_res.value();
             return true;
         }
@@ -275,19 +275,27 @@ export namespace FL{
         bool recreateSwapchain() {
             Log::debug("Recreating swapchain");
 
-            vkb::SwapchainBuilder swapchain_builder{device};
-            auto swapchain_res = swapchain_builder
-                .set_old_swapchain(swapchain)
-                .build();
+            dispatch_table.deviceWaitIdle();
 
-            if (!swapchain_res) {
-                Log::err("Failed to recreate swapchain: {}", swapchain_res.error().message());
-                swapchain.swapchain = VK_NULL_HANDLE;
-                return false;
+            dispatch_table.destroyCommandPool(render_data.command_pool, nullptr);
+            for (auto framebuffer : render_data.framebuffers) {
+                dispatch_table.destroyFramebuffer(framebuffer, nullptr);
             }
+
+            swapchain.destroy_image_views(render_data.swapchain_image_views);
+
             vkb::destroy_swapchain(swapchain);
-            swapchain = swapchain_res.value();
-            return true;
+
+            if (!createSwapchain()) Log::err("Failed to recreate swapchain!");
+            else if (!createFrameBuffers()) Log::err("Failed to recreate framebuffers!");
+            else if (!createCommandPool()) Log::err("Failed to recreate command pool!");
+            else if (!createCommandBuffers()) Log::err("Failed to recreate command buffers!");
+            else {
+                Log::debug("Swapchain recreated!");
+                return true;
+            }
+
+            return false;
         }
 
         bool createRenderPass() {
