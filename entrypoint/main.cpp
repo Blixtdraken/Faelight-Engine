@@ -20,22 +20,15 @@ int main() {
         return 1;
     }
 
-
-
-    VulkanImpl vulkan = VulkanImpl();
+    FL::VulkanBackend vulkan{};
     vulkan.setup(window);
 
-    VkResult err = glfwCreateWindowSurface(vulkan.instance, window, nullptr, &vulkan.get_surface());
-    if (err != VK_SUCCESS) {
-        FL::Log::err("Failed to create surface!");
-        return 1;
-    }
 
 
 
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-        //FL::Log::info("Pressed: {}", glfwGetKey(window, GLFW_KEY_LEFT));
+        //FL::Log::info("Pressed: {}", );
 
     }
 

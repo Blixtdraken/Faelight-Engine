@@ -7,8 +7,8 @@ export module faelight.log;
 
 #define LOG_LEVELS \
         X(JOKE,    joke,  95, 4) \
-        X(DEBUG,   debug, 92, 3) \
-        X(INFO,    info,  94, 2) \
+        X(DEBUG,   debug, 94, 3) \
+        X(INFO,    info,  92, 2) \
         X(WARNING, warn,  93, 1) \
         X(ERROR,   err,   91, 0) \
 
