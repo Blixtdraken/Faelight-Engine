@@ -17,7 +17,7 @@ int main() {
 
     if (!window) {
         FL::Log::err("Failed to create window!");
-        return 1;
+        return -1;
     }
 
     FL::VulkanBackend vulkan{};
@@ -25,12 +25,14 @@ int main() {
 
 
 
-
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-        //FL::Log::info("Pressed: {}", );
-
+        if (!vulkan.drawFrame()) {
+            break;
+        }
     }
+    glfwDestroyWindow(window);
+    glfwTerminate();
 
     return 0;
 }
